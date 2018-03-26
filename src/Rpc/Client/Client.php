@@ -28,6 +28,10 @@ abstract class Client
 
     const TIMEOUT = 0.1;
 
+    /**
+     * Client constructor.
+     * @throws RpcException
+     */
     public function __construct()
     {
         if (!isset($this->service)) {
