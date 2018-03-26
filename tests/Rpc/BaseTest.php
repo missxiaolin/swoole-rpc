@@ -43,6 +43,16 @@ class BaseTest extends TestCase
         $this->assertEquals("hi, {$name}", $result);
     }
 
+    public function testException()
+    {
+        try {
+            $result = TestClient::getInstance()->exception();
+        } catch (\Exception $ex) {
+            $this->assertEquals(400, $ex->getCode());
+            $this->assertEquals('测试异常', $ex->getMessage());
+        }
+    }
+
     public function testRecvTimeout()
     {
         try {

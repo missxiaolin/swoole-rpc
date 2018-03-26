@@ -1,6 +1,4 @@
 <?php
-namespace Lin\Enum\Exception;
-
 // +----------------------------------------------------------------------
 // | EnumException.php [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
@@ -8,6 +6,7 @@ namespace Lin\Enum\Exception;
 // +----------------------------------------------------------------------
 // | Author: xiaolin <462441355@qq.com> <https://github.com/missxiaolin>
 // +----------------------------------------------------------------------
+namespace Lin\Swoole\Rpc\Exception;
 
 use Exception;
 

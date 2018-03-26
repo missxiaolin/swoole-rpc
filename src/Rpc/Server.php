@@ -9,7 +9,7 @@
 
 namespace Lin\Swoole\Rpc;
 
-use Lin\Enum\Exception\RpcException;
+use Lin\Swoole\Rpc\Exception\RpcException;
 use Lin\Swoole\Rpc\Handler\HanderInterface;
 use swoole_server;
 

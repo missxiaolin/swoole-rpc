@@ -11,4 +11,6 @@ namespace Lin\Swoole\Rpc;
 interface SwooleClientInterface
 {
     public function handle($data);
+
+    public function flush();
 }
