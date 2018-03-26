@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "10fd8ccf84aa14951a056340f592c187",
+    "content-hash": "b9c68828dab28b6413114a41b53ed663",
     "packages": [
         {
             "name": "phalcon/dd",
@@ -1520,8 +1520,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6",
-        "ext-swoole": ">=1.10"
+        "php": ">=7.0",
+        "ext-swoole": "^2.0"
     },
     "platform-dev": []
 }

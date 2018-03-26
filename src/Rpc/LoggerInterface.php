@@ -6,19 +6,13 @@
 // +----------------------------------------------------------------------
 // | Author: xiaolin <462441355@qq.com> <https://github.com/missxiaolin>
 // +----------------------------------------------------------------------
-require __DIR__ . '/bootstrap.php';
+namespace Lin\Swoole\Rpc;
 
-use \Lin\Swoole\Rpc\Server;
-use \Tests\Rpc\App\TestHandler;
-use \Tests\Rpc\App\LoggerHandler;
+use Exception;
 
-$server = new Server();
+interface LoggerInterface
+{
+    public function info(array $request, array $response);
 
-$server->setHandler('test', TestHandler::getInstance())
-    ->setLoggerHandler(LoggerHandler::getInstance())
-    ->serve('0.0.0.0', '11520', [
-        'pid_file' => './socket.pid',
-        'daemonize' => false,
-        'max_request' => 500, // 每个worker进程最大处理请求次数
-        'worker_num' => 1,
-    ]);
+    public function error(array $request, array $response, Exception $ex);
+}

@@ -23,6 +23,31 @@ class Server
 
     public $services = [];
 
+    /** @var  LoggerInterface */
+    public $logger;
+
+    public $debug = true;
+
+    /**
+     * @param $debug
+     * @return $this
+     */
+    public function setDebug($debug)
+    {
+        $this->debug = $debug;
+        return $this;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     * @return $this
+     */
+    public function setLoggerHandler(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+        return $this;
+    }
+
     /**
      * @param $service
      * @param HanderInterface $hander
@@ -100,35 +125,45 @@ class Server
             }
 
             $result = $this->services[$service]->$method(...$arguments);
-            $server->send($fd, $this->success($result));
+            $response = $this->success($result);
+            $server->send($fd, json_encode($response));
+
+            if ($this->debug && $this->logger && $this->logger instanceof LoggerInterface) {
+                $this->logger->info($data, $response);
+            }
         } catch (\Exception $ex) {
-            $server->send($fd, $this->fail($ex->getCode(), $ex->getMessage()));
+            $response = $this->fail($ex->getCode(), $ex->getMessage());
+            $server->send($fd, json_encode($response));
+
+            if ($this->logger && $this->logger instanceof LoggerInterface) {
+                $this->logger->error($data, $response, $ex);
+            }
         }
     }
 
     /**
      * @param $result
-     * @return string
+     * @return array
      */
     public function success($result)
     {
-        return json_encode([
+        return [
             Enum::SUCCESS => true,
             Enum::DATA => $result,
-        ]);
+        ];
     }
 
     /**
      * @param $code
      * @param $message
-     * @return string
+     * @return array
      */
     public function fail($code, $message)
     {
-        return json_encode([
+        return [
             Enum::SUCCESS => false,
             Enum::ERROR_CODE => $code,
             Enum::ERROR_MESSAGE => $message,
-        ]);
+        ];
     }
 }

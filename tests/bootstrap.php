@@ -7,3 +7,5 @@
 // | Author: xiaolin <462441355@qq.com> <https://github.com/missxiaolin>
 // +----------------------------------------------------------------------
 require __DIR__ . '/../vendor/autoload.php';
+
+define('TESTS_PATH', __DIR__);
