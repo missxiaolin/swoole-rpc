@@ -1,16 +1,14 @@
 <?php
-namespace Lin\Enum\Exception;
-
 // +----------------------------------------------------------------------
 // | EnumException.php [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016-2017 xiaolin All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: limx <462441355@qq.com> <https://github.com/missxiaolin>
+// | Author: xiaolin <462441355@qq.com> <https://github.com/missxiaolin>
 // +----------------------------------------------------------------------
 
-use Exception;
+namespace Lin\Swoole\Rpc\Handler;
 
-class SwooleException extends Exception
+interface HanderInterface
 {
 }

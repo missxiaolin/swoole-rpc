@@ -4,12 +4,13 @@
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016-2017 xiaolin All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: limx <462441355@qq.com> <https://github.com/missxiaolin>
+// | Author: xiaolin <462441355@qq.com> <https://github.com/missxiaolin>
 // +----------------------------------------------------------------------
 
 namespace Lin\Swoole\Rpc;
 
-use Lin\Enum\Exception\SwooleException;
+use Lin\Enum\Exception\RpcException;
+use Lin\Swoole\Rpc\Handler\HanderInterface;
 use swoole_server;
 
 class Server
@@ -20,10 +21,29 @@ class Server
 
     public $config;
 
+    public $services = [];
+
+    /**
+     * @param $service
+     * @param HanderInterface $hander
+     * @return $this
+     */
+    public function setHandler($service, HanderInterface $hander)
+    {
+        $this->services[$service] = $hander;
+        return $this;
+    }
+
+    /**
+     * @param $host
+     * @param $port
+     * @param array $config
+     * @throws RpcException
+     */
     public function serve($host, $port, $config = [])
     {
         if (!extension_loaded('swoole')) {
-            throw new SwooleException('The swoole extension is not installed');
+            throw new RpcException('The swoole extension is not installed');
         }
 
         $this->host = $host;
@@ -43,6 +63,9 @@ class Server
         $server->start();
     }
 
+    /**
+     * @param swoole_server $server
+     */
     public function beforeServerStart(swoole_server $server)
     {
         echo "-------------------------------------------" . PHP_EOL;
@@ -50,11 +73,62 @@ class Server
         echo "-------------------------------------------" . PHP_EOL;
     }
 
+    /**
+     * @param swoole_server $server
+     * @param $workerId
+     */
     public function workerStart(swoole_server $server, $workerId)
     {
     }
 
+    /**
+     * @param swoole_server $server
+     * @param $fd
+     * @param $reactor_id
+     * @param $data
+     */
     public function receive(swoole_server $server, $fd, $reactor_id, $data)
     {
+        try {
+            $data = json_decode($data, true);
+            $service = $data['service'];
+            $method = $data['method'];
+            $arguments = $data['arguments'];
+
+            if (!isset($this->services[$service])) {
+                throw new RpcException('The service handler is not exist!');
+            }
+
+            $result = $this->services[$service]->$method(...$arguments);
+            $server->send($fd, $this->success($result));
+        } catch (\Exception $ex) {
+            $server->send($fd, $this->fail($ex->getCode(), $ex->getMessage()));
+        }
+    }
+
+    /**
+     * @param $result
+     * @return string
+     */
+    public function success($result)
+    {
+        return json_encode([
+            'success' => true,
+            'data' => $result,
+        ]);
+    }
+
+    /**
+     * @param $code
+     * @param $message
+     * @return string
+     */
+    public function fail($code, $message)
+    {
+        return json_encode([
+            'success' => false,
+            'errorCode' => $code,
+            'message' => $message,
+        ]);
     }
 }

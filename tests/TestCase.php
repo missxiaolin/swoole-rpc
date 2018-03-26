@@ -4,7 +4,7 @@
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016-2017 xiaolin All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: limx <462441355@qq.com> <https://github.com/missxiaolin>
+// | Author: xiaolin <462441355@qq.com> <https://github.com/missxiaolin>
 // +----------------------------------------------------------------------
 namespace Tests;
 

@@ -1,4 +1,6 @@
 <?php
+namespace Lin\Enum\Exception;
+
 // +----------------------------------------------------------------------
 // | EnumException.php [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
@@ -6,4 +8,9 @@
 // +----------------------------------------------------------------------
 // | Author: xiaolin <462441355@qq.com> <https://github.com/missxiaolin>
 // +----------------------------------------------------------------------
-require __DIR__ . '/../vendor/autoload.php';
+
+use Exception;
+
+class RpcException extends Exception
+{
+}
