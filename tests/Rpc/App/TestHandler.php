@@ -30,7 +30,7 @@ class TestHandler implements HanderInterface
     {
 
         return [
-            'key' => 'val'
+            'key' => 'val',
         ];
     }
 

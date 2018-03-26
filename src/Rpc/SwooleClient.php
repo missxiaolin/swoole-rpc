@@ -11,31 +11,56 @@ namespace Lin\Swoole\Rpc;
 use Lin\Enum\Exception\RpcException;
 use swoole_client;
 
-class SwooleClient
+class SwooleClient implements SwooleClientInterface
 {
 
     public $client;
 
+    protected $connectTimeout = 0.1;
+
     protected static $_instances = [];
 
-    public static function getInstance($service, $host, $port)
-    {
-        if (isset(static::$_instances[$service]) && static::$_instances[$service] instanceof static) {
-            return static::$_instances[$service];
-        }
-
-        return static::$_instances[$service] = new static($host, $port);
-    }
-
-    public function __construct($host, $port)
+    /**
+     * SwooleClient constructor.
+     * @param $host
+     * @param $port
+     * @param array $options
+     * @throws RpcException
+     */
+    public function __construct($host, $port, $options = [])
     {
         $client = new swoole_client(SWOOLE_SOCK_TCP);
-        if (!$client->connect($host, $port, -1)) {
+
+        if (isset($options['connect_timeout']) && is_numeric($options['connect_timeout'])) {
+            $this->connectTimeout = $options['connect_timeout'];
+        }
+
+        if (!$client->connect($host, $port, $this->connectTimeout)) {
             throw new RpcException("connect failed. Error: {$client->errCode}");
         }
         $this->client = $client;
     }
 
+    /**
+     * @param $service
+     * @param $host
+     * @param $port
+     * @param array $options
+     * @return mixed|static
+     */
+    public static function getInstance($service, $host, $port, $options = [])
+    {
+        if (isset(static::$_instances[$service]) && static::$_instances[$service] instanceof static) {
+            return static::$_instances[$service];
+        }
+
+        return static::$_instances[$service] = new static($host, $port, $options);
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
     public function handle($data)
     {
         $this->client->send(json_encode($data));
