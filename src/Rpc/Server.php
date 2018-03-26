@@ -72,11 +72,11 @@ class Server
         }
 
         $this->host = $host;
-        $this->port = $port;
+        $this->port = intval($port);
         $this->config = $config;
 
         set_time_limit(0);
-        $server = new swoole_server($host, $port);
+        $server = new swoole_server($this->host, $this->port);
 
         $server->set($config);
 
@@ -116,9 +116,9 @@ class Server
     {
         try {
             $data = json_decode($data, true);
-            $service = $data['service'];
-            $method = $data['method'];
-            $arguments = $data['arguments'];
+            $service = $data[Enum::SERVICE];
+            $method = $data[Enum::METHOD];
+            $arguments = $data[Enum::ARGUMENTS];
 
             if (!isset($this->services[$service])) {
                 throw new RpcException('The service handler is not exist!');
