@@ -113,8 +113,8 @@ class Server
     public function success($result)
     {
         return json_encode([
-            'success' => true,
-            'data' => $result,
+            Enum::SUCCESS => true,
+            Enum::DATA => $result,
         ]);
     }
 
@@ -126,9 +126,9 @@ class Server
     public function fail($code, $message)
     {
         return json_encode([
-            'success' => false,
-            'errorCode' => $code,
-            'message' => $message,
+            Enum::SUCCESS => false,
+            Enum::ERROR_CODE => $code,
+            Enum::ERROR_MESSAGE => $message,
         ]);
     }
 }
