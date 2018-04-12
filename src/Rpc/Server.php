@@ -114,6 +114,9 @@ class Server
      */
     public function receive(swoole_server $server, $fd, $reactor_id, $data)
     {
+        if ($this->debug) {
+            dump("fd:{$fd} data:{$data}");
+        }
         try {
             $data = json_decode($data, true);
             $service = $data[Enum::SERVICE];
