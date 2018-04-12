@@ -11,6 +11,15 @@ namespace Tests\Rpc\App;
 
 use Lin\Swoole\Rpc\Client\Client;
 
+/**
+ * Class TestClient
+ * @package Tests\Rpc\App
+ * @method returnString()
+ * @method hasArguments($name)
+ * @method exception()
+ * @method bigString($str)
+ * @method bigReturnString($str)
+ */
 class TestClient extends Client
 {
     protected $service = 'test';

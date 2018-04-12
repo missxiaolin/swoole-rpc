@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b9c68828dab28b6413114a41b53ed663",
+    "content-hash": "375cc7a5094c346c5e77215de1b715de",
     "packages": [
         {
             "name": "phalcon/dd",
@@ -16,9 +16,15 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/phalcon/dd/bc3b3404f2af4fa04301a7eadce2b2c6281cbad4.zip",
+                "url": "https://api.github.com/repos/phalcon/dd/zipball/bc3b3404f2af4fa04301a7eadce2b2c6281cbad4",
                 "reference": "bc3b3404f2af4fa04301a7eadce2b2c6281cbad4",
-                "shasum": ""
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
             },
             "require": {
                 "ext-phalcon": ">=3.0",
@@ -56,6 +62,45 @@
                 "utils"
             ],
             "time": "2017-05-06T17:11:54+00:00"
+        },
+        {
+            "name": "xiaolin/support-str",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/missxiaolin/support-str.git",
+                "reference": "0e1f75c7fc06bcfa42ffec23c3bf4339bf0916d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/missxiaolin/support-str/zipball/0e1f75c7fc06bcfa42ffec23c3bf4339bf0916d5",
+                "reference": "0e1f75c7fc06bcfa42ffec23c3bf4339bf0916d5",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "xiaolin\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "This is support for string",
+            "time": "2017-11-21T07:41:10+00:00"
         }
     ],
     "packages-dev": [

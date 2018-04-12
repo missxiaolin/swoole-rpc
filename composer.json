@@ -22,7 +22,8 @@
     "require": {
         "php": ">=7.0",
         "ext-swoole": "^2.0",
-        "phalcon/dd": "^1.1"
+        "phalcon/dd": "^1.1",
+        "xiaolin/support-str": "^0.0.1"
     },
     "require-dev": {
         "phpunit/phpunit": ">=5.6"

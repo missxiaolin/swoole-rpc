@@ -1,1 +1,1 @@
-{"request":{"service":"test","method":"exception","arguments":[]},"response":{"success":false,"errorCode":400,"errorMessage":"\u6d4b\u8bd5\u5f02\u5e38"}}
+{"request":null,"response":{"success":false,"errorCode":0,"errorMessage":"The service handler is not exist!"}}

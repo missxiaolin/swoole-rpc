@@ -10,6 +10,7 @@ namespace Tests\Rpc;
 
 use Tests\Rpc\App\TestClient;
 use Tests\TestCase;
+use xiaolin\Support\Str;
 
 class BaseTest extends TestCase
 {
@@ -61,5 +62,17 @@ class BaseTest extends TestCase
         } catch (\Exception $ex) {
             $this->assertEquals(2, $ex->getCode());
         }
+    }
+
+    public function testBigString()
+    {
+        $str = Str::random(2048);
+        $this->assertEquals($str, TestClient::getInstance()->bigString($str));
+    }
+
+    public function testBigReturnString()
+    {
+        $str = Str::random(200);
+        $this->assertEquals(str_repeat($str, 100), TestClient::getInstance()->bigReturnString($str));
     }
 }

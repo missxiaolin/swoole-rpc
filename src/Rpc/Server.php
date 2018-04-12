@@ -114,6 +114,7 @@ class Server
      */
     public function receive(swoole_server $server, $fd, $reactor_id, $data)
     {
+        $data = trim($data);
         if ($this->debug) {
             dump("fd:{$fd} data:{$data}");
         }
