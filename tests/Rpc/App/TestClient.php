@@ -19,5 +19,5 @@ class TestClient extends Client
 
     protected $port = 11520;
 
-    const TIMEOUT = 1;
+    const TIMEOUT = 3;
 }

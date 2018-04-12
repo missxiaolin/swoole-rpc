@@ -49,6 +49,7 @@ class SwooleClient implements SwooleClientInterface
      * @param $port
      * @param array $options
      * @return mixed|static
+     * @throws RpcException
      */
     public static function getInstance($service, $host, $port, $options = [])
     {
@@ -65,6 +66,7 @@ class SwooleClient implements SwooleClientInterface
     /**
      * @param $data
      * @return mixed
+     * @throws RpcException
      */
     public function handle($data)
     {
